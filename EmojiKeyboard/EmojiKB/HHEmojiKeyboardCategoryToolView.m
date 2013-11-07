@@ -20,7 +20,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.segmentsBar.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.segmentsBar.bounds));
+        
+        self.segmentsBar = [[UISegmentedControl alloc] initWithFrame:CGRectZero];
         
         #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
         self.segmentsBar.segmentedControlStyle = UISegmentedControlStyleBar;
@@ -37,9 +38,15 @@
 //        [self setSelectedCategoryImageInSegmentControl:self.segmentsBar AtIndex:DEFAULT_SELECTED_SEGMENT];
         self.segmentsBar.selectedSegmentIndex = DEFAULT_SELECTED_SEGMENT;
         [self addSubview:self.segmentsBar];
-
     }
+    
     return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+
+    self.segmentsBar.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
 }
 
 - (void)categoryChangedViaSegmentsBar:(UISegmentedControl *)sender {

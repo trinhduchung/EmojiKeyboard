@@ -152,15 +152,7 @@ CGFloat const WUEmoticonsKeyboardToolsViewDefaultHeight = 45;
     
     HHEmojiKeyboardCategoryToolView *toolsView = [[HHEmojiKeyboardCategoryToolView alloc] initWithFrame:self.toolsViewFrame];
     toolsView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    
-//    [toolsView setKeyboardSwitchButtonTappedBlock:^{
-//        [weakSelf switchToDefaultKeyboard];
-//    }];
-//    
-//    [toolsView setBackspaceButtonTappedBlock:^{
-//        [weakSelf backspace];
-//    }];
-    
+
     [toolsView setKeyItemGroupSelectedBlock:^(HHEmojiKeyboardItemGroup *keyItemGroup) {
         [weakSelf switchToKeyItemGroup:keyItemGroup];
     }];
@@ -182,11 +174,13 @@ CGFloat const WUEmoticonsKeyboardToolsViewDefaultHeight = 45;
 }
 
 - (CGRect)toolsViewFrame {
-    return CGRectMake(0, CGRectGetHeight(self.bounds) - self.toolsViewHeight, CGRectGetWidth(self.bounds), self.toolsViewHeight);
+    //return CGRectMake(0, CGRectGetHeight(self.bounds) - self.toolsViewHeight, CGRectGetWidth(self.bounds), self.toolsViewHeight);
+    return CGRectMake(0, 0, CGRectGetWidth(self.bounds), self.toolsViewHeight);
 }
 
 - (CGRect)keyItemGroupViewFrame {
-    return CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetMinY(self.toolsView.frame));
+    //return CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetMinY(self.toolsView.frame));
+    return CGRectMake(0, self.toolsViewHeight, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - self.toolsViewHeight );
 }
 
 - (void)layoutSubviews {
@@ -253,39 +247,7 @@ CGFloat const WUEmoticonsKeyboardToolsViewDefaultHeight = 45;
 }
 
 #pragma mark - Apperance
-/*
-- (UIButton *)emoticonsKeyboardButtonOfType:(WUEmoticonsKeyboardButton)type {
-    switch (type) {
-        case WUEmoticonsKeyboardButtonKeyboardSwitch:
-            return self.toolsView.keyboardSwitchButton;
-            break;
-        case WUEmoticonsKeyboardButtonBackspace:
-            return self.toolsView.backspaceButton;
-            break;
-        default:
-            return nil;
-            break;
-    }
-}
 
-- (void)setImage:(UIImage *)image forButton:(WUEmoticonsKeyboardButton)button state:(UIControlState)state {
-    [[self emoticonsKeyboardButtonOfType:button] setImage:image forState:state];
-    [self setNeedsLayout];
-}
-
-- (UIImage *)imageForButton:(WUEmoticonsKeyboardButton)button state:(UIControlState)state {
-    return [[self emoticonsKeyboardButtonOfType:button] imageForState:state];
-}
-
-- (void)setBackgroundImage:(UIImage *)image forButton:(WUEmoticonsKeyboardButton)button state:(UIControlState)state {
-    [[self emoticonsKeyboardButtonOfType:button] setBackgroundImage:image forState:state];
-    [self setNeedsLayout];
-}
-
-- (UIImage *)backgroundImageForButton:(WUEmoticonsKeyboardButton)button state:(UIControlState)state {
-    return [[self emoticonsKeyboardButtonOfType:button] backgroundImageForState:state];
-}
-*/
 - (void)setBackgroundImage:(UIImage *)image {
     [self.backgroundImageView setImage:image];
 }

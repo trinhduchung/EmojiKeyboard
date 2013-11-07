@@ -9,6 +9,7 @@
 #import "HHDemoKeyboardBuilder.h"
 #import "HHKeyboardPressedCellPopupView.h"
 #import "HHEmojiKeyboardCell.h"
+#import "HHEmojiKeyboardTextKeyCell.h"
 
 @implementation HHDemoKeyboardBuilder
 + (HHEmojiKeyboard *)sharedEmoticonsKeyboard {
@@ -19,23 +20,56 @@
         HHEmojiKeyboard *keyboard = [HHEmojiKeyboard keyboard];
         
         //Icon keys
-        HHEmojiKeyboardItem *loveKey = [[HHEmojiKeyboardItem alloc] init];
-        loveKey.image = [UIImage imageNamed:@"love"];
-        loveKey.textToInput = @"[love]";
-        
-        HHEmojiKeyboardItem *applaudKey = [[HHEmojiKeyboardItem alloc] init];
-        applaudKey.image = [UIImage imageNamed:@"applaud"];
-        applaudKey.textToInput = @"[applaud]";
-        
-        HHEmojiKeyboardItem *weicoKey = [[HHEmojiKeyboardItem alloc] init];
-        weicoKey.image = [UIImage imageNamed:@"weico"];
-        weicoKey.textToInput = @"[weico]";
-        
+        NSDictionary *customIcons = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"CustomEmojisList" ofType:@"plist"]];
+        NSMutableArray *cuscomFaceKeyItems = [NSMutableArray array];
+        for (NSArray *arrObj in customIcons.allValues) {
+            HHEmojiKeyboardItem *keyItem = [[HHEmojiKeyboardItem alloc] init];
+            NSString *text = [arrObj objectAtIndex:0];
+            NSString *image = [arrObj objectAtIndex:1];
+            
+            keyItem.title = text;
+            keyItem.textToInput = text;
+            keyItem.image = [UIImage imageNamed:image];
+            
+            [cuscomFaceKeyItems addObject:keyItem];
+        }
         //Icon key group
+        HHEmojiKeyboardKeyPageFlowLayout *iconsLayout = [[HHEmojiKeyboardKeyPageFlowLayout alloc] init];
+        iconsLayout.itemSize = CGSizeMake(40, 40);
+        iconsLayout.itemSpacing = 0;
+        iconsLayout.lineSpacing = 0;
+        iconsLayout.pageContentInsets = UIEdgeInsetsMake(0,0,0,0);
+        
         HHEmojiKeyboardItemGroup *imageIconsGroup = [[HHEmojiKeyboardItemGroup alloc] init];
-        imageIconsGroup.keyItems = @[loveKey,applaudKey,weicoKey];
-        imageIconsGroup.image = [UIImage imageNamed:@"keyboard_emotion"];
-        imageIconsGroup.selectedImage = [UIImage imageNamed:@"keyboard_emotion_selected"];
+        imageIconsGroup.keyItems = cuscomFaceKeyItems;
+        imageIconsGroup.keyItemsLayout = iconsLayout;
+        imageIconsGroup.image = [UIImage imageNamed:@"face_n"];
+        imageIconsGroup.selectedImage = [UIImage imageNamed:@"face_s"];
+        
+        //Default icon key group
+            //Text keys
+        NSDictionary *emojis = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"EmojisList" ofType:@"plist"]];
+        NSArray * faceIcons = [emojis objectForKey:@"Nature"];
+        NSMutableArray *faceKeyItems = [NSMutableArray array];
+        for (NSString *text in faceIcons) {
+            HHEmojiKeyboardItem *keyItem = [[HHEmojiKeyboardItem alloc] init];
+            keyItem.title = text;
+            keyItem.textToInput = text;
+            [faceKeyItems addObject:keyItem];
+        }
+            //icon key group
+        HHEmojiKeyboardKeyPageFlowLayout *faceIconsLayout = [[HHEmojiKeyboardKeyPageFlowLayout alloc] init];
+        faceIconsLayout.itemSize = CGSizeMake(40, 40);
+        faceIconsLayout.itemSpacing = 0;
+        faceIconsLayout.lineSpacing = 0;
+        faceIconsLayout.pageContentInsets = UIEdgeInsetsMake(0,0,0,0);
+        
+        HHEmojiKeyboardItemGroup *faceIconsGroup = [[HHEmojiKeyboardItemGroup alloc] init];
+        faceIconsGroup.keyItems = faceKeyItems;
+        faceIconsGroup.keyItemsLayout = faceIconsLayout;
+        faceIconsGroup.keyItemCellClass = [HHEmojiKeyboardTextKeyCell class];
+        faceIconsGroup.image = [UIImage imageNamed:@"face_n"];
+        faceIconsGroup.selectedImage = [UIImage imageNamed:@"face_s"];
         
         //Text keys
         NSArray *textKeys = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"EmotionTextKeys" ofType:@"plist"]];
@@ -47,7 +81,6 @@
             keyItem.textToInput = text;
             [textKeyItems addObject:keyItem];
         }
-        
         //Text key group
         HHEmojiKeyboardKeyPageFlowLayout *textIconsLayout = [[HHEmojiKeyboardKeyPageFlowLayout alloc] init];
         textIconsLayout.itemSize = CGSizeMake(80, 142 / 3.0);
@@ -58,44 +91,29 @@
         HHEmojiKeyboardItemGroup *textIconsGroup = [[HHEmojiKeyboardItemGroup alloc] init];
         textIconsGroup.keyItems = textKeyItems;
         textIconsGroup.keyItemsLayout = textIconsLayout;
-        textIconsGroup.keyItemCellClass = [HHEmojiKeyboardCell class];//WUDemoKeyboardTextKeyCell.class;
-        textIconsGroup.image = [UIImage imageNamed:@"keyboard_text"];
-        textIconsGroup.selectedImage = [UIImage imageNamed:@"keyboard_text_selected"];
+        textIconsGroup.keyItemCellClass = [HHEmojiKeyboardTextKeyCell class];
+        textIconsGroup.image = [UIImage imageNamed:@"characters_n"];
+        textIconsGroup.selectedImage = [UIImage imageNamed:@"characters_s"];
         
         //Set keyItemGroups
-        keyboard.keyItemGroups = @[imageIconsGroup,textIconsGroup];
+        keyboard.keyItemGroups = @[imageIconsGroup, faceIconsGroup, textIconsGroup];
         
         //Setup cell popup view
         [keyboard setKeyItemGroupPressedKeyCellChangedBlock:^(HHEmojiKeyboardItemGroup *keyItemGroup, HHEmojiKeyboardCell *fromCell, HHEmojiKeyboardCell *toCell) {
             [HHDemoKeyboardBuilder sharedEmotionsKeyboardKeyItemGroup:keyItemGroup pressedKeyCellChangedFromCell:fromCell toCell:toCell];
         }];
         
-        //Keyboard appearance
-        
+        //Keyboard appearance - should do later
+        /*
         //Custom text icons scroll background
         UIView *textGridBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [textIconsLayout collectionViewContentSize].width, [textIconsLayout collectionViewContentSize].height)];
         textGridBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         textGridBackgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"keyboard_grid_bg"]];
         [textIconsLayout.collectionView addSubview:textGridBackgroundView];
-        
-        //Custom utility keys
-        /*
-        [keyboard setImage:[UIImage imageNamed:@"keyboard_switch"] forButton:WUEmoticonsKeyboardButtonKeyboardSwitch state:UIControlStateNormal];
-        [keyboard setImage:[UIImage imageNamed:@"keyboard_del"] forButton:WUEmoticonsKeyboardButtonBackspace state:UIControlStateNormal];
-        [keyboard setImage:[UIImage imageNamed:@"keyboard_switch_pressed"] forButton:WUEmoticonsKeyboardButtonKeyboardSwitch state:UIControlStateHighlighted];
-        [keyboard setImage:[UIImage imageNamed:@"keyboard_del_pressed"] forButton:WUEmoticonsKeyboardButtonBackspace state:UIControlStateHighlighted];
          */
         
         //Keyboard background
         [keyboard setBackgroundImage:[[UIImage imageNamed:@"keyboard_bg"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 1)]];
-        
-        //SegmentedControl
-        /*
-        [[UISegmentedControl appearanceWhenContainedIn:[HHEmojiKeyboard class], nil] setBackgroundImage:[[UIImage imageNamed:@"keyboard_segment_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-        [[UISegmentedControl appearanceWhenContainedIn:[HHEmojiKeyboard class], nil] setBackgroundImage:[[UIImage imageNamed:@"keyboard_segment_selected"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10)] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-        [[UISegmentedControl appearanceWhenContainedIn:[HHEmojiKeyboard class], nil] setDividerImage:[UIImage imageNamed:@"keyboard_segment_normal_selected"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-        [[UISegmentedControl appearanceWhenContainedIn:[HHEmojiKeyboard class], nil] setDividerImage:[UIImage imageNamed:@"keyboard_segment_selected_normal"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-         */
         
         _sharedEmoticonsKeyboard = keyboard;
     });
@@ -106,6 +124,8 @@
              pressedKeyCellChangedFromCell:(HHEmojiKeyboardCell *)fromCell
                                     toCell:(HHEmojiKeyboardCell *)toCell
 {
+    //Should do later
+    /*
     static HHKeyboardPressedCellPopupView *pressedKeyCellPopupView;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -125,5 +145,6 @@
             pressedKeyCellPopupView.hidden = YES;
         }
     }
+     */
 }
 @end

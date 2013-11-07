@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CustomEmoji1</key>
+	<array>
+		<string>:code1:</string>
+		<string>emoji_001.png</string>
+	</array>
+	<key>CustomEmoji2</key>
+	<array>
+		<string>:code2:</string>
+		<string>emoji_002.png</string>
+	</array>
+	<key>CustomEmoji3</key>
+	<array>
+		<string>:code3:</string>
+		<string>emoji_003.png</string>
+	</array>
+	<key>CustomEmoji4</key>
+	<array>
+		<string>:code4:</string>
+		<string>emoji_004.png</string>
+	</array>
+	<key>CustomEmoji5</key>
+	<array>
+		<string>:code5:</string>
+		<string>emoji_005.png</string>
+	</array>
+	<key>CustomEmoji6</key>
+	<array>
+		<string>:code6:</string>
+		<string>emoji_006.png</string>
+	</array>
+</dict>
+</plist>
