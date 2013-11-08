@@ -42,10 +42,6 @@
 
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
-    //generate 100 buttons
-    //normally we'd use a backing array
-    //as shown in the basic iOS example
-    //but for this example we haven't bothered
     NSUInteger count = [HHDemoKeyboardBuilder sharedEmoticonsKeyboard].keyItemGroupViews.count;
 
     return count;
@@ -54,10 +50,23 @@
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
 {
 //    CGSize size = carousel.contentOffset;
+    /*
+    UIScrollView *itemView = (UIScrollView *)view;
+    if (itemView == nil) {
+        itemView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 150, 150)];
+        itemView.contentSize = CGSizeMake(150 * 10, 150);
+        itemView.backgroundColor = [UIColor redColor];
+    }
+    
+    return itemView;
+     */
+    
 	HHEmojiKeyboardItemGroupView *pagerViews = (HHEmojiKeyboardItemGroupView *)view;
     if (pagerViews == nil) {
         pagerViews = [[HHDemoKeyboardBuilder sharedEmoticonsKeyboard].keyItemGroupViews objectAtIndex:index];
+
     }
+    
     NSLog(@"%@", NSStringFromCGRect(pagerViews.frame));
 	return pagerViews;
 }
