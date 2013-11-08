@@ -24,6 +24,10 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.iCarousel.type = iCarouselTypeCoverFlow2;
     self.iCarousel.backgroundColor = [UIColor grayColor];
+    
+    [[HHDemoKeyboardBuilder sharedEmoticonsKeyboard] setKeyboardCategorySelectedBlock:^(HHEmojiKeyboardItemGroup *keyItemGroup, NSInteger selectedIndex) {
+        [self.iCarousel setCurrentItemIndex:selectedIndex];
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

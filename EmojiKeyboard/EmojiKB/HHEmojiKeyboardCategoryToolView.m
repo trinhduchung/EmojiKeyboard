@@ -63,7 +63,7 @@
     }];
     if (self.keyItemGroupSelectedBlock) {
         HHEmojiKeyboardItemGroup *selectedKeyItemGroup = [self.keyItemGroups objectAtIndex:self.segmentsBar.selectedSegmentIndex];
-        self.keyItemGroupSelectedBlock(selectedKeyItemGroup);
+        self.keyItemGroupSelectedBlock(selectedKeyItemGroup, self.segmentsBar.selectedSegmentIndex);
     }
 }
 

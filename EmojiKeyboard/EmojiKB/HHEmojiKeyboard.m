@@ -153,8 +153,11 @@ CGFloat const WUEmoticonsKeyboardToolsViewDefaultHeight = 45;
     HHEmojiKeyboardCategoryToolView *toolsView = [[HHEmojiKeyboardCategoryToolView alloc] initWithFrame:self.toolsViewFrame];
     toolsView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 
-    [toolsView setKeyItemGroupSelectedBlock:^(HHEmojiKeyboardItemGroup *keyItemGroup) {
+    [toolsView setKeyItemGroupSelectedBlock:^(HHEmojiKeyboardItemGroup *keyItemGroup, NSInteger selectedIndex) {
         [weakSelf switchToKeyItemGroup:keyItemGroup];
+        if (weakSelf.keyboardCategorySelectedBlock) {
+            weakSelf.keyboardCategorySelectedBlock(keyItemGroup, selectedIndex);
+        }
     }];
     
     [self addSubview:toolsView];

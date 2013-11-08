@@ -19,7 +19,7 @@
     dispatch_once(&onceToken, ^{
         //create a keyboard of default size
         HHEmojiKeyboard *keyboard = [HHEmojiKeyboard keyboard];
-        
+ 
         //Icon keys
         NSDictionary *customIcons = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"CustomEmojisList" ofType:@"plist"]];
         NSMutableArray *cuscomFaceKeyItems = [NSMutableArray array];
