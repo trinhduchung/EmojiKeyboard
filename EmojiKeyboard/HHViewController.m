@@ -24,6 +24,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.iCarousel.type = iCarouselTypeCoverFlow2;
+    self.iCarousel.backgroundColor = [UIColor grayColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -63,7 +64,8 @@
     
 	HHEmojiKeyboardItemGroupView *pagerViews = (HHEmojiKeyboardItemGroupView *)view;
     if (pagerViews == nil) {
-        pagerViews = [[HHDemoKeyboardBuilder sharedEmoticonsKeyboard].keyItemGroupViews objectAtIndex:index];
+        pagerViews = [[HHEmojiKeyboardItemGroupView alloc] initWithFrame:CGRectMake(0, 0, 150, 150)];
+        pagerViews.keyItemGroup = [[HHDemoKeyboardBuilder sharedEmoticonsKeyboard].keyItemGroups objectAtIndex:index];
 
     }
     
@@ -71,7 +73,11 @@
 	return pagerViews;
 }
 
-
+- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
+    
+}
+#pragma mark -
+#pragma mark - Action
 - (IBAction)switchKeyboard:(id)sender {
     if (self.textView.isFirstResponder) {
         if (self.textView.emoticonsKeyboard) [self.textView switchToDefaultKeyboard];
