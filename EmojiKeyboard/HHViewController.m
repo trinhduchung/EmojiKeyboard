@@ -19,8 +19,7 @@
 
 @implementation HHViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.iCarousel.type = iCarouselTypeCoverFlow2;
@@ -41,27 +40,13 @@
 #pragma mark -
 #pragma mark iCarousel methods
 
-- (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
-{
-    NSUInteger count = [HHDemoKeyboardBuilder sharedEmoticonsKeyboard].keyItemGroupViews.count;
+- (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel {
+    NSUInteger count = [HHDemoKeyboardBuilder sharedEmoticonsKeyboard].keyItemGroups.count;
 
     return count;
 }
 
-- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
-{
-//    CGSize size = carousel.contentOffset;
-    /*
-    UIScrollView *itemView = (UIScrollView *)view;
-    if (itemView == nil) {
-        itemView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 150, 150)];
-        itemView.contentSize = CGSizeMake(150 * 10, 150);
-        itemView.backgroundColor = [UIColor redColor];
-    }
-    
-    return itemView;
-     */
-    
+- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view { 
 	HHEmojiKeyboardItemGroupView *pagerViews = (HHEmojiKeyboardItemGroupView *)view;
     if (pagerViews == nil) {
         pagerViews = [[HHEmojiKeyboardItemGroupView alloc] initWithFrame:CGRectMake(0, 0, 150, 150)];
@@ -69,13 +54,35 @@
 
     }
     
-    NSLog(@"%@", NSStringFromCGRect(pagerViews.frame));
 	return pagerViews;
 }
 
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
+    NSLog(@"didSelectItemAtIndex %d", index);
     
 }
+
+- (void)carouselWillBeginDragging:(iCarousel *)carousel {
+    NSLog(@"carouselWillBeginDragging");
+    [self.textView resignFirstResponder];
+}
+
+- (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel {
+    NSLog(@"carouselDidEndScrollingAnimation");
+    [self performSelector:@selector(showKeyBoard:) withObject:carousel afterDelay:1.0];
+}
+
+- (void)carouselCurrentItemIndexDidChange:(iCarousel *)carousel {
+    NSLog(@"%d", carousel.currentItemIndex);
+    
+}
+
+- (void) showKeyBoard:(iCarousel *)carousel {
+    [self.textView switchToEmoticonsKeyboard:[HHDemoKeyboardBuilder sharedEmoticonsKeyboard]];
+    [[HHDemoKeyboardBuilder sharedEmoticonsKeyboard] switchToCategoryAtIndex:carousel.currentItemIndex];
+    [self.textView becomeFirstResponder];
+}
+
 #pragma mark -
 #pragma mark - Action
 - (IBAction)switchKeyboard:(id)sender {

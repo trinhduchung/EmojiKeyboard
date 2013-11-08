@@ -12,4 +12,5 @@
 @interface HHEmojiKeyboardCategoryToolView : UIView
 @property (nonatomic,strong) NSArray *keyItemGroups;
 @property (nonatomic,copy)   void    (^keyItemGroupSelectedBlock)(HHEmojiKeyboardItemGroup *keyItemGroup);
+@property (nonatomic, retain) UISegmentedControl *segmentsBar;
 @end

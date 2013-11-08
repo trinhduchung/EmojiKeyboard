@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, WUEmoticonsKeyboardButton) {
  an array of WUEmoticonsKeyboardKeyItemGroup.
  */
 @property (nonatomic,copy)              NSArray  *keyItemGroups;
-@property (nonatomic,strong)            NSArray  *keyItemGroupViews;
+//@property (nonatomic,strong)            NSArray  *keyItemGroupViews;
 @property (nonatomic,copy) void    (^keyItemGroupPressedKeyCellChangedBlock)(HHEmojiKeyboardItemGroup *keyItemGroup, HHEmojiKeyboardCell *fromKeyCell, HHEmojiKeyboardCell *toKeyCell);
 /*
  Note:
@@ -54,6 +54,8 @@ typedef NS_ENUM(NSUInteger, WUEmoticonsKeyboardButton) {
 - (void)setBackgroundImage:(UIImage *)image forButton:(WUEmoticonsKeyboardButton)button state:(UIControlState)state UI_APPEARANCE_SELECTOR;
 - (UIImage *)backgroundImageForButton:(WUEmoticonsKeyboardButton)button state:(UIControlState)state;
  */
+
+- (void)switchToCategoryAtIndex:(NSInteger) index;
 
 @property (nonatomic) CGFloat toolsViewHeight UI_APPEARANCE_SELECTOR; //Default 45.0f
 

@@ -11,7 +11,7 @@
 #define DEFAULT_SELECTED_SEGMENT 0
 
 @interface HHEmojiKeyboardCategoryToolView()
-@property (nonatomic, retain) UISegmentedControl *segmentsBar;
+//@property (nonatomic, retain) UISegmentedControl *segmentsBar;
 @end
 @implementation HHEmojiKeyboardCategoryToolView
 

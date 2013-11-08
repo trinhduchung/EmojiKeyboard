@@ -20,7 +20,7 @@ CGFloat const WUEmoticonsKeyboardToolsViewDefaultHeight = 45;
 @property (nonatomic,weak,readwrite) UIResponder<UITextInput>           *textInput;
 @property (nonatomic,weak)           HHEmojiKeyboardCategoryToolView    *toolsView;
 @property (nonatomic,weak)           UIImageView                        *backgroundImageView;
-//@property (nonatomic,strong)         NSArray                            *keyItemGroupViews;
+@property (nonatomic,strong)         NSArray                            *keyItemGroupViews;
 @property (nonatomic,readonly)       CGRect                             keyItemGroupViewFrame;
 @end
 @implementation HHEmojiKeyboard
@@ -197,9 +197,6 @@ CGFloat const WUEmoticonsKeyboardToolsViewDefaultHeight = 45;
     _keyItemGroups = [keyItemGroups copy];
     [self reloadKeyItemGroupViews];
     self.toolsView.keyItemGroups = keyItemGroups;
-//    if (keyItemGroups.count > 0) {
-//        [self switchToKeyItemGroup:[keyItemGroups objectAtIndex:0]];
-//    }
 }
 
 - (void)reloadKeyItemGroupViews {
@@ -241,6 +238,13 @@ CGFloat const WUEmoticonsKeyboardToolsViewDefaultHeight = 45;
 - (void)keyItemTapped:(HHEmojiKeyboardItem *)keyItem {
     [self inputText:keyItem.textToInput];
     [UIDevice.currentDevice playInputClick];
+}
+
+#pragma mark -
+#pragma mark Public methods
+- (void)switchToCategoryAtIndex:(NSInteger)index {
+    self.toolsView.segmentsBar.selectedSegmentIndex = index;
+    [self switchToKeyItemGroup:[self.keyItemGroups objectAtIndex:index]];
 }
 
 #pragma mark - UIInputViewAudioFeedback
