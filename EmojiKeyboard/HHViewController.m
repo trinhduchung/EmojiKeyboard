@@ -29,7 +29,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.textView becomeFirstResponder];
+//    [self.textView becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning

@@ -97,7 +97,7 @@
         textIconsGroup.selectedImage = [UIImage imageNamed:@"characters_s"];
         
         //Set keyItemGroups
-        keyboard.keyItemGroups = @[imageIconsGroup, faceIconsGroup, textIconsGroup];
+        keyboard.keyItemGroups = @[imageIconsGroup, faceIconsGroup];
         
         //Setup cell popup view
         [keyboard setKeyItemGroupPressedKeyCellChangedBlock:^(HHEmojiKeyboardItemGroup *keyItemGroup, HHEmojiKeyboardCell *fromCell, HHEmojiKeyboardCell *toCell) {
