@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, WUEmoticonsKeyboardButton) {
  an array of WUEmoticonsKeyboardKeyItemGroup.
  */
 @property (nonatomic,copy) NSArray *keyItemGroups;
-
+@property (nonatomic,strong)         NSArray                            *keyItemGroupViews;
 @property (nonatomic,copy) void    (^keyItemGroupPressedKeyCellChangedBlock)(HHEmojiKeyboardItemGroup *keyItemGroup, HHEmojiKeyboardCell *fromKeyCell, HHEmojiKeyboardCell *toKeyCell);
 /*
  Note:

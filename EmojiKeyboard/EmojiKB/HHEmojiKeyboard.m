@@ -20,7 +20,7 @@ CGFloat const WUEmoticonsKeyboardToolsViewDefaultHeight = 45;
 @property (nonatomic,weak,readwrite) UIResponder<UITextInput>           *textInput;
 @property (nonatomic,weak)           HHEmojiKeyboardCategoryToolView    *toolsView;
 @property (nonatomic,weak)           UIImageView                        *backgroundImageView;
-@property (nonatomic,strong)         NSArray                            *keyItemGroupViews;
+//@property (nonatomic,strong)         NSArray                            *keyItemGroupViews;
 @property (nonatomic,readonly)       CGRect                             keyItemGroupViewFrame;
 @end
 @implementation HHEmojiKeyboard
@@ -174,13 +174,13 @@ CGFloat const WUEmoticonsKeyboardToolsViewDefaultHeight = 45;
 }
 
 - (CGRect)toolsViewFrame {
-    //return CGRectMake(0, CGRectGetHeight(self.bounds) - self.toolsViewHeight, CGRectGetWidth(self.bounds), self.toolsViewHeight);
+//    return CGRectMake(0, CGRectGetHeight(self.bounds) - self.toolsViewHeight, CGRectGetWidth(self.bounds), self.toolsViewHeight);
     return CGRectMake(0, 0, CGRectGetWidth(self.bounds), self.toolsViewHeight);
 }
 
 - (CGRect)keyItemGroupViewFrame {
-    //return CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetMinY(self.toolsView.frame));
-    return CGRectMake(0, self.toolsViewHeight, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - self.toolsViewHeight );
+//    return CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetMinY(self.toolsView.frame));
+    return CGRectMake(0, self.toolsViewHeight, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - self.toolsViewHeight);
 }
 
 - (void)layoutSubviews {
@@ -197,6 +197,9 @@ CGFloat const WUEmoticonsKeyboardToolsViewDefaultHeight = 45;
     _keyItemGroups = [keyItemGroups copy];
     [self reloadKeyItemGroupViews];
     self.toolsView.keyItemGroups = keyItemGroups;
+//    if (keyItemGroups.count > 0) {
+//        [self switchToKeyItemGroup:[keyItemGroups objectAtIndex:0]];
+//    }
 }
 
 - (void)reloadKeyItemGroupViews {

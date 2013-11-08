@@ -10,6 +10,7 @@
 #import "HHKeyboardPressedCellPopupView.h"
 #import "HHEmojiKeyboardCell.h"
 #import "HHEmojiKeyboardTextKeyCell.h"
+#import "HHEmojiKeyboardItem.h"
 
 @implementation HHDemoKeyboardBuilder
 + (HHEmojiKeyboard *)sharedEmoticonsKeyboard {
@@ -146,5 +147,7 @@
         }
     }
      */
+    
+    NSLog(@"text = %@", toCell.keyItem.textToInput);
 }
 @end

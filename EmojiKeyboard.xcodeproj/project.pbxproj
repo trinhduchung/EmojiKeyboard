@@ -57,6 +57,7 @@
 		773066BB182B1F9D0076B079 /* keyboard_text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77306697182B1F9D0076B079 /* keyboard_text@2x.png */; };
 		773066BC182B1F9D0076B079 /* keyboard_text_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 77306698182B1F9D0076B079 /* keyboard_text_selected.png */; };
 		773066BD182B1F9D0076B079 /* keyboard_text_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77306699182B1F9D0076B079 /* keyboard_text_selected@2x.png */; };
+		775BFDA0182BEDD100AC26CD /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 775BFD9F182BEDD100AC26CD /* iCarousel.m */; };
 		778425C8182A8CE500CEE66D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 778425C7182A8CE500CEE66D /* Foundation.framework */; };
 		778425CA182A8CE500CEE66D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 778425C9182A8CE500CEE66D /* CoreGraphics.framework */; };
 		778425CC182A8CE500CEE66D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 778425CB182A8CE500CEE66D /* UIKit.framework */; };
@@ -368,6 +369,8 @@
 		77306697182B1F9D0076B079 /* keyboard_text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_text@2x.png"; sourceTree = "<group>"; };
 		77306698182B1F9D0076B079 /* keyboard_text_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard_text_selected.png; sourceTree = "<group>"; };
 		77306699182B1F9D0076B079 /* keyboard_text_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_text_selected@2x.png"; sourceTree = "<group>"; };
+		775BFD9E182BEDD100AC26CD /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		775BFD9F182BEDD100AC26CD /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		778425C4182A8CE500CEE66D /* EmojiKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		778425C7182A8CE500CEE66D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		778425C9182A8CE500CEE66D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -729,6 +732,15 @@
 			path = Keyboard;
 			sourceTree = "<group>";
 		};
+		775BFD9D182BEDD100AC26CD /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				775BFD9E182BEDD100AC26CD /* iCarousel.h */,
+				775BFD9F182BEDD100AC26CD /* iCarousel.m */,
+			);
+			path = iCarousel;
+			sourceTree = "<group>";
+		};
 		778425BB182A8CE500CEE66D = {
 			isa = PBXGroup;
 			children = (
@@ -762,6 +774,7 @@
 		778425CD182A8CE500CEE66D /* EmojiKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				775BFD9D182BEDD100AC26CD /* iCarousel */,
 				825BD14A182B77FA00423FBC /* EmojisList.plist */,
 				825BD143182B725000423FBC /* EmotionTextKeys.plist */,
 				778425FC182A8D9C00CEE66D /* EmojiKB */,
@@ -1443,6 +1456,7 @@
 				7784260E182A95EE00CEE66D /* HHEmojiKeyboardItemGroupView.m in Sources */,
 				778425D8182A8CE500CEE66D /* HHAppDelegate.m in Sources */,
 				77306670182B16950076B079 /* HHEmojiKeyboard.m in Sources */,
+				775BFDA0182BEDD100AC26CD /* iCarousel.m in Sources */,
 				77842605182A8F0300CEE66D /* HHEmojiKeyboardCell.m in Sources */,
 				778425D4182A8CE500CEE66D /* main.m in Sources */,
 				77306654182B12D30076B079 /* HHEmojiKeyboardCategoryToolView.m in Sources */,

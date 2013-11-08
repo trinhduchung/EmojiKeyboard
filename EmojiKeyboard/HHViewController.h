@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "iCarousel.h"
 
-@interface HHViewController : UIViewController
+@interface HHViewController : UIViewController <iCarouselDataSource, iCarouselDelegate, UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet iCarousel *iCarousel;
 
 @end
